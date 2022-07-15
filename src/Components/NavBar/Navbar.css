@@ -4,6 +4,9 @@
     padding: 4px;
     position: fixed;
     top: 44px;
+    left: 0;
+    box-sizing: border-box;
+    box-shadow: -6px 2px 8px 1px #000;
     background-color: #0480c9;
     background-image: linear-gradient(180deg,
             rgba(0, 0, 0, .3),
@@ -13,10 +16,13 @@
     justify-content: flex-start;
     align-items: center;
     cursor: pointer;
-    box-sizing: border-box;
 }
 
-.Button_ButtonWrapper {
+.Sidebar:hover {
+    background-color: #fff;
+}
+
+.ButtonWrapper {
     width: 32px;
     height: 32px;
     cursor: pointer;
@@ -29,16 +35,16 @@
     background-color: transparent;
 }
 
-.Button_white {
+.white {
     background-color: #fff;
 }
 
-.Button_Transparent {
+.Transparent {
     background-color: transparent;
     margin-top: 8px;
 }
 
-.Button_Icon {
+.Icon {
     width: 20px;
     height: 20px;
     position: relative;
