@@ -1,12 +1,14 @@
 import './App.css';
 import NavBar from "./Components/NavBar/NavBar";
 import Header from "./Components/Header/Header";
-function App() {
+import Main from "./Components/Main/Main";
+
+const App = () => {
   return (
     <div>
       <Header />
       <NavBar />
-      <main></main>
+      <Main />
     </div>
   );
 }

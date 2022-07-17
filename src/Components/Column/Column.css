@@ -1,0 +1,11 @@
+.ListCard_MainContainer {
+    min-width: 272px;
+    width: 272px;
+    height: auto;
+    max-height: calc(100vh-180px);
+    overflow-y: auto;
+    background-color: #ebecf0;
+    margin: 0 4px;
+    border-radius: 3px;
+    padding: 10px 8px 8px;
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import "./Header.css"
-import SearchIcon from '@mui/icons-material/Search';
+import { Search } from '@material-ui/icons';
 
 const Header = () => {
     return (
@@ -56,7 +56,7 @@ const Header = () => {
                         type="search"
                         placeholder="Search"
                     />
-                    <span><SearchIcon fontSize='small' /></span>
+                    <span><Search /></span>
                 </div>
                 <button className="ButtonWrapper">
                     <img className="Icon" alt="" src="https://trello-replica.web.app/static/media/info.23e92631.png" />
