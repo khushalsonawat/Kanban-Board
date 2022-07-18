@@ -2,13 +2,14 @@ import { Close, StarOutline } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react'
 import { Button } from 'react-bootstrap';
 import { v4 as uuid } from "uuid";
-
 import NewColumn from '../NewColumn/NewColumn';
 import Column from "../Column/Column";
 import { initialData } from '../../utils';
 import "./Main.css";
+import { DragDropContext } from 'react-beautiful-dnd';
 
-const Main = (props) => {
+
+const Main = () => {
     let initial = { lists: [] };
     if (localStorage.getItem('columns') !== undefined) {
         initial.lists = JSON.parse(localStorage.getItem('columns'));
@@ -19,38 +20,38 @@ const Main = (props) => {
     }
     const [state, setState] = useState(initial);
 
-    const onDragStart = (e, fromColumn) => {
-        const dragInfo = {
-            taskId: e.currentTarget.id,
-            fromColumn: fromColumn
-        }
-        localStorage.setItem("dragInfo", JSON.stringify(dragInfo));
-    }
+    // const onDragStart = (e, fromColumn) => {
+    //     const dragInfo = {
+    //         taskId: e.currentTarget.id,
+    //         fromColumn: fromColumn
+    //     }
+    //     localStorage.setItem("dragInfo", JSON.stringify(dragInfo));
+    // }
 
-    const onDragOver = (e) => {
-        e.preventDefault();
-    }
+    // const onDragOver = (e) => {
+    //     e.preventDefault();
+    // }
 
-    const onDrop = (e, columnNum) => {
-        const parsedDragInfo = JSON.parse(localStorage.getItem("dragInfo"));
-        const parsedCols = JSON.parse(localStorage.getItem("columns"));
-        const fromColumnTaskArray = parsedCols[parsedDragInfo.fromColumn].tasks;
-        const taskCard = fromColumnTaskArray.find(task => task.id === parsedDragInfo.taskId);
-        const index = fromColumnTaskArray.findIndex(task => task.id === parsedDragInfo.taskId);
+    // const onDrop = (e, columnNum) => {
+    //     const parsedDragInfo = JSON.parse(localStorage.getItem("dragInfo"));
+    //     const parsedCols = JSON.parse(localStorage.getItem("columns"));
+    //     const fromColumnTaskArray = parsedCols[parsedDragInfo.fromColumn].tasks;
+    //     const taskCard = fromColumnTaskArray.find(task => task.id === parsedDragInfo.taskId);
+    //     const index = fromColumnTaskArray.findIndex(task => task.id === parsedDragInfo.taskId);
 
-        if (index < 0) {
-            return;
-        }
-        parsedCols[parsedDragInfo.fromColumn].tasks.splice(index, 1);
-        parsedCols[columnNum].tasks.push({
-            ...taskCard,
-            columnNumber: columnNum
-        })
+    //     if (index < 0) {
+    //         return;
+    //     }
+    //     parsedCols[parsedDragInfo.fromColumn].tasks.splice(index, 1);
+    //     parsedCols[columnNum].tasks.push({
+    //         ...taskCard,
+    //         columnNumber: columnNum
+    //     })
 
-        setState({ lists: parsedCols });
+    //     setState({ lists: parsedCols });
 
-        localStorage.setItem('columns', JSON.stringify(parsedCols));
-    }
+    //     localStorage.setItem('columns', JSON.stringify(parsedCols));
+    // }
 
     const addTask = (taskText, columnNum) => {
         const parsedCols = JSON.parse(localStorage.getItem('columns'));
@@ -79,6 +80,38 @@ const Main = (props) => {
         setState({
             lists: parsedCols,
         })
+    }
+
+    const handleDragEnd = ({ destination, source }) => {
+        if (!destination) {
+            return;
+        }
+        if (destination.index === source.index && destination.droppableId === source.droppableId) {
+            return;
+        }
+
+        const initialList = state.lists;
+        let draggedItem = null;
+        let draggedFromListPos = -1;
+        let draggedToListPos = -1;
+
+        for (let i = 0; i < initialList.length; ++i) {
+            if (initialList[i].id === source.droppableId) {
+                draggedItem = initialList[i].tasks[source.index];
+                draggedFromListPos = i;
+            }
+            if (initialList[i].id === destination.droppableId) {
+                draggedToListPos = i;
+            }
+        }
+
+        if (draggedFromListPos > -1 && draggedToListPos > -1) {
+            initialList[draggedFromListPos].tasks.splice(source.index, 1);
+            initialList[draggedToListPos].tasks.splice(destination.index, 0, draggedItem);
+            setState({
+                lists: initialList,
+            })
+        }
     }
 
     useEffect(() => {
@@ -112,21 +145,23 @@ const Main = (props) => {
                         <span className="DefaultAvatar">AH</span>
                     </div>
                     <div className="MainPage_ListWrapper">
-                        {state.lists.map((column, index) => {
-                            return (
-                                <div className="TaskCard_Container" key={index}>
-                                    <Column {...column}
-                                        onAdd={(tastText, columnNum) => addTask(tastText, columnNum)}
-                                        onDragStart={(e) => onDragStart(e, column.column)}
-                                        onDragOver={(e) => onDragOver(e)}
-                                        onDrop={(e, columnNum) => {
-                                            onDrop(e, column.column)
-                                        }}
-                                    />
-                                </div>
-                            )
-                        })
-                        }
+                        <DragDropContext onDragEnd={handleDragEnd}>
+                            {state.lists.map((column, index) => {
+                                return (
+                                    <div className="TaskCard_Container" key={index}>
+                                        <Column {...column}
+                                            onAdd={(tastText, columnNum) => addTask(tastText, columnNum)}
+                                        // onDragStart={(e) => onDragStart(e, column.column)}
+                                        // onDragOver={(e) => onDragOver(e)}
+                                        // onDrop={(e, columnNum) => {
+                                        //     onDrop(e, column.column)
+                                        // }}
+                                        />
+                                    </div>
+                                )
+                            })
+                            }
+                        </DragDropContext>
                         <NewColumn onAddColumn={onAddColumn} />
                     </div>
                 </div>
