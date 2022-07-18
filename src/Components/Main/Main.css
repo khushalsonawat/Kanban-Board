@@ -138,8 +138,8 @@ div {
 .Button_Icon {
     width: 20px;
     height: 20px;
-    position: right;
-    top: 2px;
+    position: relative;
+    top: 5px;
     padding-right: 8px;
 }
 

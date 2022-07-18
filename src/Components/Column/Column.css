@@ -31,3 +31,8 @@
 .TaskCardWrapper {
     margin: 8px 0;
 }
+
+.More {
+    position: relative;
+    top: 2px
+}
