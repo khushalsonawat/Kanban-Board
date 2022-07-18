@@ -1,5 +1,7 @@
+import { Add, Close } from '@material-ui/icons';
 import React, { useState } from 'react'
 import { Form, Button } from 'react-bootstrap';
+import "./NewTask.css";
 
 const NewTask = (props) => {
   const [value, setValue] = useState('');
@@ -11,28 +13,35 @@ const NewTask = (props) => {
     const columnNum = props.columnNum;
     if (taskText && props.onAdd) {
       props.onAdd(taskText, columnNum);
+      setValue('');
+      setIsEdit(false);
     }
-    setValue('');
   }
 
   const handleChange = (event) => {
     setValue(event.target.value);
   }
 
-  if (isEdit) {
+  if (!isEdit) {
     return (
-      <div className="open-add-button" onClick={() => setIsEdit(true)}>
-        <a href="#">Add a Task!</a>
+      <div
+        className="AddMoreWrapper"
+        onClick={() => setIsEdit(true)}
+      >
+        <Add />
+        Add a card
       </div >
     )
   }
   return (
     <Form onSubmit={handleSubmit}>
       <Form.Group>
-        <Form.Control placeholder="Enter a title for this card" value={value} onChange={handleChange} />
+        <Form.Control className="InputBox" placeholder="Enter a title for this card" value={value} onChange={handleChange} />
       </Form.Group>
-      <Button variant="primary" type="submit">Add card</Button>
-      <Button variant="primary" onClick={() => setIsEdit(false)}>Cancel</Button>
+      <div className='NewTask_ButtonWrapper'>
+        <Button className="Button_ButtonWrapper NewTask_Primary" type="submit">Add card</Button>
+        <span className="NewTask_closeButton" onClick={() => setIsEdit(false)}><Close /></span>
+      </div>
     </Form>
   )
 }

@@ -166,3 +166,7 @@
 .SearchInput:focus::placeholder {
     color: black;
 }
+
+.search {
+    color: #fff
+}

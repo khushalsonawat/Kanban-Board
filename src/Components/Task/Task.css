@@ -1,0 +1,25 @@
+.TaskCardMainContainer {
+    background-color: white;
+    border-radius: 3px;
+    padding: 6px 8px 2px;
+    box-shadow: 0 1px 0 #091e4240;
+    cursor: pointer;
+    margin-bottom: 8px;
+}
+
+.TaskCardMainContainer:hover {
+    background-color: #F4F5F7;
+}
+
+.TaskCardMainContainer:last-of-type {
+    margin-bottom: 0;
+}
+
+.TaskCard_Message {
+    margin: 0 0 4px;
+    overflow: hidden;
+    font-size: 14px;
+    color: #172b4d;
+    line-height: 20px;
+    font-weight: 400;
+}

@@ -56,7 +56,7 @@ const Header = () => {
                         type="search"
                         placeholder="Search"
                     />
-                    <span><Search /></span>
+                    <span className='search'><Search /></span>
                 </div>
                 <button className="ButtonWrapper">
                     <img className="Icon" alt="" src="https://trello-replica.web.app/static/media/info.23e92631.png" />

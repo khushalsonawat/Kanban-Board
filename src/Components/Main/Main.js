@@ -1,8 +1,12 @@
+import { Close, StarOutline } from '@material-ui/icons';
 import React, { useState, useEffect } from 'react'
-import "./Main.css";
+import { Button } from 'react-bootstrap';
 import { v4 as uuid } from "uuid";
+
+import NewColumn from '../NewColumn/NewColumn';
 import Column from "../Column/Column";
-import { Close } from '@material-ui/icons';
+import { initialData } from '../../utils';
+import "./Main.css";
 
 const Main = (props) => {
     let initial = { lists: [] };
@@ -10,67 +14,7 @@ const Main = (props) => {
         initial.lists = JSON.parse(localStorage.getItem('columns'));
     }
     else {
-        initial.lists = [
-            {
-                title: "To Do",
-                id: uuid(),
-                column: 0,
-                tasks: [{
-                    taskText: "Helpdesk Call AA999",
-                    columnNumber: 0,
-                    id: uuid(),
-                },
-                {
-                    taskText: "Helpdesk Call BB999",
-                    columnNumber: 0,
-                    id: uuid(),
-                }
-                ]
-
-            },
-            {
-                title: "Development",
-                id: uuid(),
-                column: 1,
-                tasks: [{
-                    taskText: "Helpdesk Call CC999",
-                    columnNumber: 1,
-                    id: uuid(),
-                },
-                {
-                    taskText: "Helpdesk Call DD999",
-                    columnNumber: 1,
-                    id: uuid(),
-                }
-                ]
-            },
-            {
-                title: "Testing",
-                id: uuid(),
-                column: 2,
-                tasks: [{
-                    taskText: "Helpdesk Call EE999",
-                    columnNumber: 2,
-                    id: uuid(),
-                }
-                ]
-            },
-            {
-                title: "Done",
-                id: uuid(),
-                column: 3,
-                tasks: [{
-                    taskText: "Helpdesk Call FF999",
-                    columnNumber: 3,
-                    id: uuid(),
-                },
-                {
-                    taskText: "Helpdesk Call GG999",
-                    columnNumber: 3,
-                    id: uuid(),
-                }]
-            }
-        ]
+        initial.lists = initialData;
         localStorage.setItem("columns", JSON.stringify(initial.lists));
     }
     const [state, setState] = useState(initial);
@@ -121,8 +65,20 @@ const Main = (props) => {
         setState({
             lists: parsedCols,
         })
+    }
 
-        // localStorage.setItem('columns', JSON.stringify(state.lists));
+    const onAddColumn = (columnName) => {
+        const parsedCols = JSON.parse(localStorage.getItem('columns'));
+        let obj = {
+            title: columnName,
+            id: uuid(),
+            column: parsedCols.length,
+            tasks: [],
+        }
+        parsedCols.push(obj);
+        setState({
+            lists: parsedCols,
+        })
     }
 
     useEffect(() => {
@@ -144,9 +100,16 @@ const Main = (props) => {
                 <div className="MainPage_MainContainer">
                     <div className="MainPage_TitleWrapper">
                         <h1 className="MainPage_Title">Kanban Board</h1>
-                    </div>
-                    <div className="MainPage_StarWrapper">
-                        <span></span>
+                        <div className="MainPage_StarWrapper">
+                            <span className="Star"><StarOutline fontSize='small' /></span>
+                        </div>
+                        <div className="MainPage_Separator"></div>
+                        <Button className="PublicButton BtnSecondary">
+                            <img className="Button_Icon" alt="" src="https://trello-replica.web.app/static/media/earth_white.b0d834ac.svg" />
+                            <span className="Label">Public</span>
+                        </Button>
+                        <div className="MainPage_Separator"></div>
+                        <span className="DefaultAvatar">AH</span>
                     </div>
                     <div className="MainPage_ListWrapper">
                         {state.lists.map((column, index) => {
@@ -164,10 +127,11 @@ const Main = (props) => {
                             )
                         })
                         }
+                        <NewColumn onAddColumn={onAddColumn} />
                     </div>
                 </div>
             </section>
-        </main>
+        </main >
     )
 }
 

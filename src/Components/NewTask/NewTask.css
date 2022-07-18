@@ -1,0 +1,67 @@
+.AddMoreWrapper {
+    display: flex;
+    align-items: center;
+    color: #5e6c84;
+    border-radius: 3px;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 20px;
+    padding: 2px 0;
+    cursor: pointer;
+}
+
+.AddMoreWrapper:hover {
+    background-color: #091e4214;
+    color: #172b4d;
+}
+
+.InputBox {
+    width: 100%;
+    background-color: #fff;
+    border: 2px solid #0079bf;
+    padding: 8px 12px;
+    border-radius: 3px;
+    outline: none;
+    margin-bottom: 8px;
+    box-sizing: border-box;
+}
+
+.NewTask_ButtonWrapper {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+
+
+.NewTask_closeButton {
+    color: #42526e;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.NewTask_closeButton:hover {
+    color: rgba(0, 0, 0, 1);
+}
+
+.Button_ButtonWrapper {
+    width: 32px;
+    height: 32px;
+    cursor: pointer;
+    border: 0;
+    border-radius: 3px;
+    outline: 0;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+}
+
+.NewTask_Primary {
+    width: max-content;
+    color: white;
+    background-color: #0079bf;
+    padding: 0 12px;
+}

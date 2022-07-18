@@ -2,11 +2,12 @@ import React from 'react'
 import Task from '../Task/Task';
 import NewTask from "../NewTask/NewTask";
 import './Column.css';
+import { MoreHoriz } from "@material-ui/icons";
 
 const Column = (props) => {
     const cards = props.tasks.map((card, index) => {
         return (
-            <div key={index}>
+            <div className="TaskCardWrapper" key={index}>
                 <Task {...card} onDragStart={props.onDragStart} />
             </div>
         )
@@ -14,7 +15,10 @@ const Column = (props) => {
 
     return (
         <div className="ListCard_MainContainer">
-            <h2 className={`name-header name-${props.id}`} >{props.title}</h2>
+            <div className="ListCard_TitleWrapper" >
+                <h3 className="ListCard_Title">{props.title}</h3>
+                <span><MoreHoriz /></span>
+            </div>
             <div className='list' onDragOver={props.onDragOver} onDrop={props.onDrop} >
                 {cards}
                 <div className="add-list-wrapper">

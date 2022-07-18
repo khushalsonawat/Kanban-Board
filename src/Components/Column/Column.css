@@ -2,10 +2,32 @@
     min-width: 272px;
     width: 272px;
     height: auto;
-    max-height: calc(100vh-180px);
+    max-height: calc(100vh - 180px);
     overflow-y: auto;
     background-color: #ebecf0;
     margin: 0 4px;
     border-radius: 3px;
     padding: 10px 8px 8px;
+}
+
+.ListCard_TitleWrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    overflow-y: auto;
+}
+
+.ListCard_Title {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 4px 8px 10px;
+    line-height: 20px;
+    color: #172b4d;
+}
+
+.TaskCardWrapper {
+    margin: 8px 0;
 }
