@@ -16,7 +16,9 @@
 }
 
 .AddIcon {
+    position: relative;
     margin-right: 4px;
+    height: 24px;
 }
 
 .InputBox {
