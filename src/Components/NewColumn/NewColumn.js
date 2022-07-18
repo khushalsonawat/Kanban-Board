@@ -34,14 +34,14 @@ const NewColumn = (props) => {
         <Form className='NewColumnWrapperForm' onSubmit={handleSubmit}>
             <Form.Group>
                 <Form.Control
-                    placeholder="Enter list Title"
+                    placeholder="Enter list title"
                     name="NewColumn"
                     value={columnName}
                     onChange={handleChange}
                     className="NewColumn_InputBox"
                 />
                 <div className="NewTask_ButtonWrapper">
-                    <Button className="Button_ButtonWrapper NewTask_Primary" type="submit">Add card</Button>
+                    <Button className="Button_ButtonWrapper NewTask_Primary" type="submit">Add list</Button>
                     <span className="NewTask_closeButton" onClick={() => setIsEditing(false)}><Close /></span>
                 </div>
             </Form.Group>

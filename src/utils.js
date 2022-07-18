@@ -6,14 +6,22 @@ export const initialData = [
         id: uuid(),
         column: 0,
         tasks: [{
+            id: uuid(),
             taskText: "Helpdesk Call AA999",
             columnNumber: 0,
-            id: uuid(),
+            label: {
+                title: "CP",
+                color: "#0079bf",
+            }
         },
         {
+            id: uuid(),
             taskText: "Helpdesk Call BB999",
             columnNumber: 0,
-            id: uuid(),
+            label: {
+                title: "CP",
+                color: "#0079bf",
+            }
         }
         ]
 
@@ -23,14 +31,22 @@ export const initialData = [
         id: uuid(),
         column: 1,
         tasks: [{
+            id: uuid(),
             taskText: "Helpdesk Call CC999",
             columnNumber: 1,
-            id: uuid(),
+            label: {
+                title: "Fault",
+                color: "#eb5a46",
+            }
         },
         {
-            taskText: "Helpdesk Call DD999",
-            columnNumber: 1,
             id: uuid(),
+            taskText: "Helpdesk Call EE999",
+            columnNumber: 2,
+            label: {
+                title: "CP",
+                color: "#0079bf",
+            }
         }
         ]
     },
@@ -38,11 +54,16 @@ export const initialData = [
         title: "Testing",
         id: uuid(),
         column: 2,
-        tasks: [{
-            taskText: "Helpdesk Call EE999",
-            columnNumber: 2,
-            id: uuid(),
-        }
+        tasks: [
+            {
+                id: uuid(),
+                taskText: "Helpdesk Call DD999",
+                columnNumber: 1,
+                label: {
+                    title: "Fault",
+                    color: "#eb5a46",
+                }
+            }
         ]
     },
     {
@@ -50,14 +71,23 @@ export const initialData = [
         id: uuid(),
         column: 3,
         tasks: [{
-            taskText: "Helpdesk Call FF999",
-            columnNumber: 3,
             id: uuid(),
-        },
-        {
             taskText: "Helpdesk Call GG999",
             columnNumber: 3,
+            label: {
+                title: "Fault",
+                color: "#eb5a46",
+            }
+        },
+        {
             id: uuid(),
-        }]
+            taskText: "Helpdesk Call FF999",
+            columnNumber: 3,
+            label: {
+                title: "CP",
+                color: "#0079bf",
+            }
+        }
+        ]
     }
 ]

@@ -28,7 +28,9 @@ const NewTask = (props) => {
         className="AddMoreWrapper"
         onClick={() => setIsEdit(true)}
       >
-        <Add />
+        <span className='AddIcon'>
+          <Add />
+        </span>
         Add a card
       </div >
     )

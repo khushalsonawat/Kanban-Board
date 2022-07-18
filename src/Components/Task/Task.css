@@ -23,3 +23,20 @@
     line-height: 20px;
     font-weight: 400;
 }
+
+.TaskLabelWrapper {
+    background-color: #eb5a46;
+    width: 40px;
+    height: 8px;
+    margin: 0 4px 4px 0;
+    font-size: 12px;
+    font-weight: 700;
+    border-radius: 4px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.TaskLabelWrapper:hover {
+    background-color: #B04632;
+}

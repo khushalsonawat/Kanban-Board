@@ -42,7 +42,6 @@ const Column = (props) => {
                     (provided, snapshot) => {
                         return (
                             <div
-
                                 className='list'
                                 ref={provided.innerRef}
                                 {...provided.droppableProps}

@@ -11,47 +11,20 @@ import { DragDropContext } from 'react-beautiful-dnd';
 
 const Main = () => {
     let initial = { lists: [] };
-    if (localStorage.getItem('columns') !== undefined) {
-        initial.lists = JSON.parse(localStorage.getItem('columns'));
-    }
-    else {
-        initial.lists = initialData;
-        localStorage.setItem("columns", JSON.stringify(initial.lists));
-    }
     const [state, setState] = useState(initial);
 
-    // const onDragStart = (e, fromColumn) => {
-    //     const dragInfo = {
-    //         taskId: e.currentTarget.id,
-    //         fromColumn: fromColumn
-    //     }
-    //     localStorage.setItem("dragInfo", JSON.stringify(dragInfo));
-    // }
-
-    // const onDragOver = (e) => {
-    //     e.preventDefault();
-    // }
-
-    // const onDrop = (e, columnNum) => {
-    //     const parsedDragInfo = JSON.parse(localStorage.getItem("dragInfo"));
-    //     const parsedCols = JSON.parse(localStorage.getItem("columns"));
-    //     const fromColumnTaskArray = parsedCols[parsedDragInfo.fromColumn].tasks;
-    //     const taskCard = fromColumnTaskArray.find(task => task.id === parsedDragInfo.taskId);
-    //     const index = fromColumnTaskArray.findIndex(task => task.id === parsedDragInfo.taskId);
-
-    //     if (index < 0) {
-    //         return;
-    //     }
-    //     parsedCols[parsedDragInfo.fromColumn].tasks.splice(index, 1);
-    //     parsedCols[columnNum].tasks.push({
-    //         ...taskCard,
-    //         columnNumber: columnNum
-    //     })
-
-    //     setState({ lists: parsedCols });
-
-    //     localStorage.setItem('columns', JSON.stringify(parsedCols));
-    // }
+    useEffect(() => {
+        if (JSON.parse(localStorage.getItem('columns')) !== undefined) {
+            setState({
+                lists: JSON.parse(localStorage.getItem('columns'))
+            });
+        }
+        else {
+            setState({
+                lists: initialData
+            });
+        }
+    }, [])
 
     const addTask = (taskText, columnNum) => {
         const parsedCols = JSON.parse(localStorage.getItem('columns'));
@@ -60,7 +33,6 @@ const Main = () => {
             columnNum,
             id: uuid(),
         }
-        console.log(obj);
         parsedCols[columnNum].tasks.push(obj);
 
         setState({
@@ -146,16 +118,11 @@ const Main = () => {
                     </div>
                     <div className="MainPage_ListWrapper">
                         <DragDropContext onDragEnd={handleDragEnd}>
-                            {state.lists.map((column, index) => {
+                            {state.lists && state.lists.map((column, index) => {
                                 return (
                                     <div className="TaskCard_Container" key={index}>
                                         <Column {...column}
                                             onAdd={(tastText, columnNum) => addTask(tastText, columnNum)}
-                                        // onDragStart={(e) => onDragStart(e, column.column)}
-                                        // onDragOver={(e) => onDragOver(e)}
-                                        // onDrop={(e, columnNum) => {
-                                        //     onDrop(e, column.column)
-                                        // }}
                                         />
                                     </div>
                                 )
