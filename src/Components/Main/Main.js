@@ -14,10 +14,11 @@ const Main = () => {
     const [state, setState] = useState(initial);
 
     useEffect(() => {
-        if (JSON.parse(localStorage.getItem('columns')) !== undefined) {
+        if (JSON.parse(localStorage.getItem('columns')) !== null) {
             setState({
                 lists: JSON.parse(localStorage.getItem('columns'))
             });
+            console.log(JSON.parse(localStorage.getItem('columns')) !== undefined);
         }
         else {
             setState({
